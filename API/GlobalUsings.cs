@@ -13,3 +13,4 @@ global using API.Helpers;
 global using API.DTOs;
 global using API.Errors;
 global using API.Middleware;
+global using API.Extentions;

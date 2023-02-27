@@ -5,42 +5,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<StoreContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
-builder.Services.Configure<ApiBehaviorOptions>(options =>
-{
-    options.InvalidModelStateResponseFactory = actionContext =>
-    {
-        var errors = actionContext.ModelState
-            .Where(e => e.Value.Errors.Count > 0)
-            .SelectMany(x => x.Value.Errors)
-            .Select(x => x.ErrorMessage).ToArray();
-
-        var errorResponse = new ApiValidationErrorResponse
-        {
-            Errors = errors
-        };
-
-        return new BadRequestObjectResult(errorResponse);
-    };
-});
+builder.Services.AddApplicationServices(builder.Configuration);
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseMiddleware<ExceptionMiddleware>();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
