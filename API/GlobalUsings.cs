@@ -3,6 +3,7 @@ global using Microsoft.EntityFrameworkCore;
 global using AutoMapper;
 global using System.Net;
 global using System.Text.Json;
+global using StackExchange.Redis;
 
 
 global using Infrastructure.Data;

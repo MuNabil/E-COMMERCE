@@ -9,6 +9,12 @@ builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
 builder.Services.AddApplicationServices(builder.Configuration);
 
+builder.Services.AddSingleton<IConnectionMultiplexer>(c =>
+{
+    var configuration = ConfigurationOptions.Parse(builder.Configuration.GetConnectionString("Redis"), true);
+    return ConnectionMultiplexer.Connect(configuration);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
