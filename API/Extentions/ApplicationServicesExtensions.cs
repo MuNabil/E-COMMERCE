@@ -11,6 +11,7 @@ namespace API.Extentions
             Services.AddScoped<IProductRepository, ProductRepository>();
             Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             Services.AddScoped<IBasketRepository, BasketRepository>();
+            Services.AddScoped<ITokenService, TokenService>();
 
             Services.Configure<ApiBehaviorOptions>(options =>
             {

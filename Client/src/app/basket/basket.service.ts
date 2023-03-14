@@ -18,19 +18,13 @@ export class BasketService {
   constructor(private http: HttpClient) { }
 
   getBasket(id: string) {
-    return this.http.get<IBasket>(this.baseUrl + 'basket?id=' + id).pipe(
-      map(basket => {
-        this.basketSource.next(basket);
-        this.calculateTotals();
-
+    return this.http.get<IBasket>(this.baseUrl + 'basket?id=' + id)
+      .subscribe({
+        next: basket => {
+          this.basketSource.next(basket);
+          this.calculateTotals();
+        }
       })
-    );
-    // .subscribe({
-    //   next: basket => {
-    //     this.basketSource.next(basket);
-    //     this.calculateTotals();
-    //   }
-    // })
   }
 
   setBasket(basket: IBasket) {
