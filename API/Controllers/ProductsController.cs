@@ -20,7 +20,7 @@ namespace API.Controllers
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
         {
             var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
-            var products = await _productsRepo.LisAsync(spec);
+            var products = await _productsRepo.ListAsync(spec);
 
             var countSpec = new ProductsWithFiltersForCountSpecification(productParams);
             var totalProducts = await _productsRepo.CountAsync(countSpec);

@@ -3,7 +3,6 @@ global using Microsoft.EntityFrameworkCore;
 global using AutoMapper;
 global using System.Net;
 global using System.Text.Json;
-global using StackExchange.Redis;
 global using Microsoft.AspNetCore.Identity;
 global using System.Security.Claims;
 global using Microsoft.AspNetCore.Authorization;
