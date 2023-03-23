@@ -8,14 +8,11 @@ import { IOrder } from 'src/app/shared/models/order';
   styleUrls: ['./checkout-success.component.scss']
 })
 export class CheckoutSuccessComponent {
-  order: IOrder;
+  order?: IOrder;
 
   constructor(private router: Router) {
     const navigation = this.router.getCurrentNavigation();
-    this.order = navigation?.extras?.state?.['order'];
-  }
-
-  ngOnInit(): void {
+    this.order = navigation?.extras?.state as IOrder
   }
 
 }
