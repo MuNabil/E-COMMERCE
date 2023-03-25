@@ -8,6 +8,7 @@ namespace API.Extentions
             Services.AddDbContext<StoreContext>(options =>
                 options.UseSqlite(config.GetConnectionString("DefaultConnection")));
 
+            Services.AddSingleton<IResponseCacheService, ResponseCacheService>();
             Services.AddScoped<IProductRepository, ProductRepository>();
             Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             Services.AddScoped<IBasketRepository, BasketRepository>();
